@@ -17,8 +17,10 @@
 #define FW_COMMIT ""
 #endif
 
-// Compile-time firmware version string
-#define FW_VERSION_STRING    TOSTRING(FW_MAJOR_VERSION) "." TOSTRING(FW_MINOR_VERSION) "." TOSTRING(FW_PATCH_VERSION)
+#include <own_version.h> // FW_OWN_BUILD: the build number of our fork
+
+// Compile-time firmware version string: "<upstream version>-own.<FW_OWN_BUILD>", for example "1.8.19-own.1"
+#define FW_VERSION_STRING    TOSTRING(FW_MAJOR_VERSION) "." TOSTRING(FW_MINOR_VERSION) "." TOSTRING(FW_PATCH_VERSION) "-own." TOSTRING(FW_OWN_BUILD)
 
 #define LOG_MAX_NOTES_NUMBER 10
 

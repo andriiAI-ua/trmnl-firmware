@@ -5,6 +5,7 @@
 #include <display.h>
 #include <display_session.h>
 #include <globals.h>
+#include <own_banner.h>
 #include <request_handling.h>
 #include <setup_session.h>
 #include <sleep_session.h>
@@ -42,7 +43,9 @@ void bl_init(void) {
   WakeContext wake = readWakeContext();
   openPreferences();
   startBoardHardware(wake, init_time);
-  if (wake.reason != ESP_SLEEP_WAKEUP_TIMER) showWakeLogo();
+  // Own fork: a short press changes the screen. Show a banner with a quick partial update, not the logo.
+  // If the panel cannot do a partial update, show the logo as before.
+  if (wake.reason != ESP_SLEEP_WAKEUP_TIMER && !(button_next_screen && display_show_change_banner())) showWakeLogo();
   logVersions();
 
   wifiSessionConnect(wake.showErrorsNow);

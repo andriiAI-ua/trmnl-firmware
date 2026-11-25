@@ -81,6 +81,7 @@ ApiDisplayInputs createApiHeaders() {
   inputs.imageCached = bUsedCachedImage;
   inputs.prevWakeTime = iPrevWakeTime;
   inputs.resetReason = resetReasonName(esp_reset_reason());
+  inputs.button = button_next_screen ? "next" : "";
   inputs.usbStatus = power().usbStatus();
   inputs.chargingStatus = power().chargingStatus();
 

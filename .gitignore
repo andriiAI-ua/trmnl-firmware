@@ -29,3 +29,8 @@ managed_components/
 # Integration test environment (contains secrets)
 test/integration/test_config.h
 dependencies.lock
+
+# Own fork: output of build.sh and the local review files
+/dist/
+/CHANGES.diff
+/COMMIT_MSG.txt

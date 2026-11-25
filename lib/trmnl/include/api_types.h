@@ -80,6 +80,7 @@ struct ApiDisplayInputs {
   bool imageCached;
   int prevWakeTime;
   String resetReason; // esp_reset_reason_t name of this boot, e.g. ESP_RST_PANIC
+  String button;      // own fork: "next" after a short press of the button; empty = no "Button" header
 };
 
 using ApiSetupInputs = ApiDisplayInputs;
@@ -99,7 +100,7 @@ typedef struct DeviceStatusStamp {
   char wifi_status[30];
   uint32_t refresh_rate;
   uint32_t time_since_last_sleep;
-  char current_fw_version[10];
+  char current_fw_version[24]; // own versions are longer, for example "1.8.19-own.12"
   char special_function[100];
   float battery_voltage;
   char wakeup_reason[30];

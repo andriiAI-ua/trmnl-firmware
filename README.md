@@ -2,6 +2,20 @@
 
 created for the [TRMNL](https://trmnl.com) e-ink display.
 
+## This fork
+
+This fork of [usetrmnl/trmnl-firmware](https://github.com/usetrmnl/trmnl-firmware) works with
+[trmnl-server](https://github.com/andriiAI-ua/trmnl-server), a self-hosted (BYOS) server. It is based on v1.8.19 and adds:
+
+- version `<upstream version>-own.<N>` (`include/own_version.h`), so that the server sends only newer builds;
+- `build.sh`: a release build (`-Os`) into `dist/`: the OTA image, its `.json` manifest and a factory image;
+- `docker-build.sh`: the same build in Docker, for example on a home server;
+- `publish.sh`: puts a build into `wwwroot/firmware` of the trmnl-server checkout next to this one,
+  for the OTA update through the server;
+- a short press of the button shows the next screen: the device sends the header `Button: next`
+  and at once draws a banner until the new screen comes.
+
+
 > [!IMPORTANT]
 > the `main` branch is under constant development and may contain breaking changes. flash at your own risk.
 >

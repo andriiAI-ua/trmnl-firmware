@@ -170,6 +170,19 @@ void test_display_headers_special_function_named_when_chosen(void) {
   TEST_ASSERT_EQUAL_STRING("rewind", valueOf(headers, "special_function").c_str());
 }
 
+void test_display_headers_button_omitted_when_empty(void) {
+  auto inputs = makeDisplayInputs();
+  auto headers = buildDisplayHeaders(inputs);
+  TEST_ASSERT_FALSE(has(headers, "Button"));
+}
+
+void test_display_headers_button_next_after_short_press(void) {
+  auto inputs = makeDisplayInputs();
+  inputs.button = "next";
+  auto headers = buildDisplayHeaders(inputs);
+  TEST_ASSERT_EQUAL_STRING("next", valueOf(headers, "Button").c_str());
+}
+
 void test_display_headers_toggle_hold_named_when_chosen(void) {
   auto inputs = makeDisplayInputs();
   inputs.specialFunction = SF_TOGGLE_HOLD;
@@ -286,6 +299,8 @@ void process() {
   RUN_TEST(test_display_headers_special_function_present_when_set);
   RUN_TEST(test_display_headers_special_function_named_when_chosen);
   RUN_TEST(test_display_headers_toggle_hold_named_when_chosen);
+  RUN_TEST(test_display_headers_button_omitted_when_empty);
+  RUN_TEST(test_display_headers_button_next_after_short_press);
   RUN_TEST(test_display_headers_panel_id_omitted_when_empty);
   RUN_TEST(test_display_headers_panel_id_present_when_set);
   RUN_TEST(test_display_headers_panel_vcom_omitted_when_empty);

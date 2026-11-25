@@ -100,6 +100,7 @@ ButtonPressResult read_button_presses() {
 
 // Acts on the press read after a button wake: a long press forgets WiFi, a soft-reset press forgets the
 // device (does not return). Returns true for a double click, which runs the special function.
+// Own fork: a short press asks the server for the next screen ("Button: next" header), as KEY on the RLCD.
 bool button_wake_act(ButtonPressResult button) {
   bool double_click = false;
   Log_info("GPIO wakeup (%d) -> button was read (%s)", wakeup_reason, ButtonPressResultNames[button]);
@@ -112,6 +113,9 @@ bool button_wake_act(ButtonPressResult button) {
     double_click = true;
     break;
   case ShortPress:
+    Log_info("Short press: ask the server for the next screen");
+    button_next_screen = true;
+    break;
   case NoAction:
     break;
   case SoftReset:
